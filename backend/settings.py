@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 # ✅ Include both localhost and deployed domains
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost,authentication-appdev.onrender.com").split(",")
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'rest_framework',
@@ -62,9 +62,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # ✅ Use sqlite for dev, or override with Render PostgreSQL
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        default=f'sqlite:///{os.path.join(BASE_DIR, "db.sqlite3")}',
         conn_max_age=600,
-        ssl_require=True
+        ssl_require=False  # Don't require SSL for local SQLite
     )
 }
 
@@ -93,7 +93,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ✅ Allow only your frontend
 CORS_ALLOWED_ORIGINS = [
-    "https://mypit3.netlify.app",
+    "http://localhost:3000",
+    "https://elloauthentication.netlify.app",
 ]
 CORS_ALLOW_CREDENTIALS = True
 
