@@ -2,8 +2,19 @@ services:
   - type: web
     name: backend
     env: python
-    buildCommand: "poetry install"
-    startCommand: "poetry run python backend/manage.py runserver 0.0.0.0:8000"
+    buildCommand: "poetry install && poetry run python manage.py migrate"
+    startCommand: "poetry run gunicorn backend.wsgi"
+    rootDirectory: "backend"
     envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: backend.settings
+      - key: "ALLOWED_HOSTS"
+        value: "localhost,127.0.0.1"
+      - key: "CORS_ALLOW_CREDENTIALS"
+        value: "True"
+      - key: "CSRF_TRUSTED_ORIGINS"
+        value: "https://mypit3.netlify.app"
+      - key: "DATABASE_URL"
+        value: "postgresql://mypit3_user:G1Vcssc2qPp3uG6Kn3214qbrQBoK7DXI@dpg-cvpqe0k9c44c73duviq0-a/mypit3_db"
+      - key: "DEBUG"
+        value: "False"
+      - key: "SECRET_KEY"
+        value: "your-secret-key-here"
