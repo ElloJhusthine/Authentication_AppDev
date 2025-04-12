@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 # ✅ Include both localhost and deployed domains
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'authentication-appdev.onrender.com']
 
 INSTALLED_APPS = [
     'rest_framework',
