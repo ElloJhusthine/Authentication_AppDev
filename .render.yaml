@@ -2,8 +2,10 @@ services:
   - type: web
     name: authentication-appdev
     env: python
-    buildCommand: poetry install && poetry run python manage.py migrate && poetry run python manage.py collectstatic --noinput
-    startCommand: poetry run gunicorn backend.wsgi
+    buildCommand: |
+      poetry install
+      poetry run python manage.py migrate
+    startCommand: poetry run gunicorn backend.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: backend.settings
