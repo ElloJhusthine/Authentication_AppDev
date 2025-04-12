@@ -11,7 +11,7 @@ services:
       - key: "CORS_ALLOW_CREDENTIALS"
         value: "True"
       - key: "CSRF_TRUSTED_ORIGINS"
-        value: "https://mypit3.netlify.app"
+        value: "https://elloauthentication.netlify.app"
       - key: "DATABASE_URL"
         value: "postgresql://mypit3_user:G1Vcssc2qPp3uG6Kn3214qbrQBoK7DXI@dpg-cvpqe0k9c44c73duviq0-a/mypit3_db"
       - key: "DEBUG"
