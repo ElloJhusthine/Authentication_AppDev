@@ -1,13 +1,18 @@
 services:
   - type: web
     name: authentication-appdev
-    env: python
+    runtime: python
     buildCommand: |
+      cd backend
       poetry install
       poetry run python manage.py migrate
-    startCommand: poetry run gunicorn backend.wsgi:application
+    startCommand: cd backend && poetry run gunicorn backend.wsgi:application
     envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: backend.settings
-      - key: PYTHON_VERSION
-        value: 3.11.11
+      - key: DATABASE_URL
+        fromDatabase:
+          name: your-database-name
+          property: connectionString
+      - key: SECRET_KEY
+        value: your-secret-key
+      - key: DEBUG
+        value: False
