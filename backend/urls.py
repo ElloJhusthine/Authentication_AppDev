@@ -17,7 +17,7 @@ def api_root(request):
         "routes": [
             "/admin/",
             "/api/tasks/",
-            "/api-token-auth/",
+            "/api/token-auth/",
             "/secure-hello/"
         ]
     })
@@ -25,7 +25,7 @@ def api_root(request):
 urlpatterns = [
     path('', api_root),  # 👈 Root welcome
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),                      # Task API routes
-    path('api-token-auth/', CustomObtainAuthToken.as_view()),  # Custom token auth
-    path('secure-hello/', secure_hello),                     # Protected endpoint
+    path('api/', include(router.urls)),                          # Task API routes
+    path('api/token-auth/', CustomObtainAuthToken.as_view()),   # Token auth endpoint
+    path('secure-hello/', secure_hello),                         # Protected endpoint
 ]
